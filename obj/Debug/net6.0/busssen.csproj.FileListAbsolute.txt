@@ -1,0 +1,15 @@
+D:\Programmering project\busssen\bin\Debug\net6.0\busssen.exe
+D:\Programmering project\busssen\bin\Debug\net6.0\busssen.deps.json
+D:\Programmering project\busssen\bin\Debug\net6.0\busssen.runtimeconfig.json
+D:\Programmering project\busssen\bin\Debug\net6.0\busssen.dll
+D:\Programmering project\busssen\bin\Debug\net6.0\busssen.pdb
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.csproj.AssemblyReference.cache
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.AssemblyInfoInputs.cache
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.AssemblyInfo.cs
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.csproj.CoreCompileInputs.cache
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.dll
+D:\Programmering project\busssen\obj\Debug\net6.0\refint\busssen.dll
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.pdb
+D:\Programmering project\busssen\obj\Debug\net6.0\busssen.genruntimeconfig.cache
+D:\Programmering project\busssen\obj\Debug\net6.0\ref\busssen.dll
