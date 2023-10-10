@@ -2,108 +2,140 @@
 
 namespace Bussen
 {
+    // Skapa en klass för att lagra information om passagerare
     class Buss
     {
-        public int[] passagerare;
-        public int antal_passagerare;
-
-        public Buss()
+        public class Passenger
         {
-            passagerare = new int[25]; // Skapar en vektor med plats för 25 passagerare
-            antal_passagerare = 0; // Ingen passagerare vid start
+            public int Age { get; set; }     // Ålder
+            public string Gender { get; set; }  // Kön
         }
 
+        public Passenger[] passagerare;   // En array för att lagra passagerarobjekt
+        public int antal_passagerare;    // Antal passagerare
+
+        // Konstruktor för Buss-klassen
+        public Buss()
+        {
+            passagerare = new Passenger[25]; // Skapa en array med plats för 25 passagerarobjekt
+            antal_passagerare = 0;          // Initialt finns det inga passagerare
+        }
+
+        // Huvudmetod för att köra bussimulatorn
         public void Run()
         {
-            Console.WriteLine("Welcome to the awesome Buss-simulator");
+            Console.WriteLine("Välkommen till den fantastiska Buss-simulatorn");
 
             bool running = true;
             while (running)
             {
                 Console.WriteLine();
-                Console.WriteLine("Menu:");
-                Console.WriteLine("1. Add passenger");
-                Console.WriteLine("2. Print bus");
-                Console.WriteLine("3. Calculate total age");
-                Console.WriteLine("4. Quit");
-                Console.Write("Enter your choice: ");
+                Console.WriteLine("Meny:");
+                Console.WriteLine("1. Lägg till passagerare");
+                Console.WriteLine("2. Skriv ut bussen");
+                Console.WriteLine("3. Beräkna total ålder");
+                Console.WriteLine("4. Avsluta");
+                Console.Write("Ange ditt val: ");
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        add_passenger();
+                        LäggTillPassagerare();  // Anropa metoden för att lägga till en passagerare
                         break;
                     case "2":
-                        print_buss();
+                        SkrivUtBuss();  // Anropa metoden för att skriva ut bussinformation
                         break;
                     case "3":
-                        int totalAge = calc_total_age();
-                        Console.WriteLine("Total age of passengers: " + totalAge);
+                        BeräknaTotalÅlder();  // Anropa metoden för att beräkna total ålder
                         break;
                     case "4":
-                        running = false;
+                        running = false;  // Avsluta programmet
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please try again.");
+                        Console.WriteLine("Ogiltigt val. Försök igen.");
                         break;
                 }
             }
         }
 
-        // Lägger till en passagerare till bussen
-  public void add_passenger()
+        // Metod för att lägga till en passagerare i bussen
+        public void LäggTillPassagerare()
         {
-            Console.Write("Enter passenger's age: ");
-            string input = Console.ReadLine();
-            int age;
+            Console.Write("Ange passagerarens ålder: ");
+            string ageInput = Console.ReadLine();
+            int ålder;
 
-            if (int.TryParse(input, out age))
+            if (int.TryParse(ageInput, out ålder))
             {
-                // Åldern konverterades till ett heltal
-                // Lägg till passageraren i bussen
-                // ...
-                Console.WriteLine("Passenger added successfully.");
+                string kön;
+
+                do
+                {
+                    Console.Write("Ange passagerarens kön (man/kvinna): ");
+                    kön = Console.ReadLine().ToLower(); // Konvertera inmatningen till gemener för att göra jämförelsen icke-skiftlägeskänslig
+                } while (kön != "man" && kön != "kvinna");
+
+                passagerare[antal_passagerare] = new Passenger { Age = ålder, Gender = kön };
+                antal_passagerare++;
+                Console.WriteLine("Passagerare tillagd med framgång.");
             }
             else
             {
-                Console.WriteLine("Invalid input. Age must be a valid integer.");
+                Console.WriteLine("Ogiltig inmatning. Åldern måste vara ett giltigt heltal.");
             }
         }
 
-        // Skriver ut alla passagerare på bussen
-        public void print_buss()
+        // Metod för att skriva ut bussinformation, inklusive information om passagerare
+        public void SkrivUtBuss()
         {
-            Console.WriteLine("Passengers on the bus:");
+            Console.WriteLine("Passagerare på bussen:");
 
             for (int i = 0; i < antal_passagerare; i++)
             {
-                Console.WriteLine("Passenger {0}: Age {1}", i + 1, passagerare[i]);
+                Console.WriteLine("Passagerare {0}: Kön {1}, Ålder {2}", i + 1, passagerare[i].Gender, passagerare[i].Age);
             }
         }
 
-        // Beräknar den totala åldern av alla passagerare på bussen
-        public int calc_total_age()
+        // Metod för att beräkna total ålder, total ålder för män och total ålder för kvinnor
+        public void BeräknaTotalÅlder()
         {
-            int totalAge = 0;
+            int totalÅlder = 0;
+            int totalÅlderMan = 0;
+            int totalÅlderKvinna = 0;
+            int antalMan = 0;
+            int antalKvinna = 0;
 
             for (int i = 0; i < antal_passagerare; i++)
             {
-                totalAge += passagerare[i];
+                totalÅlder += passagerare[i].Age;
+                if (passagerare[i].Gender == "man")
+                {
+                    totalÅlderMan += passagerare[i].Age;
+                    antalMan++;
+                }
+                else if (passagerare[i].Gender == "kvinna")
+                {
+                    totalÅlderKvinna += passagerare[i].Age;
+                    antalKvinna++;
+                }
             }
 
-            return totalAge;
+            Console.WriteLine("Total ålder av alla passagerare: " + totalÅlder);
+            Console.WriteLine("Total ålder av män: " + totalÅlderMan + " (Antal män: " + antalMan + ")");
+            Console.WriteLine("Total ålder av kvinnor: " + totalÅlderKvinna + " (Antal kvinnor: " + antalKvinna + ")");
         }
     }
 
     class Program
     {
+        // Huvudmetod, programmet börjar här
         public static void Main(string[] args)
         {
-            var minbuss = new Buss();
-            minbuss.Run();
+            var minbuss = new Buss(); // Skapa en instans av Buss-klassen
+            minbuss.Run(); // Kör bussimulatorn
 
-            Console.Write("Press any key to continue . . . ");
+            Console.Write("Tryck på valfri tangent för att fortsätta . . . ");
             Console.ReadKey(true);
         }
     }
